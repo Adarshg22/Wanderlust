@@ -35,6 +35,8 @@ const listingValidate = (req, res, next) => {
   if (error) {
     let errMsg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(400, errMsg);
+  } else {
+    next();
   }
 };
 
@@ -73,7 +75,6 @@ app.get(
 //Edit Route
 app.get(
   "/listing/:id/edit",
-  listingValidate,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
@@ -84,10 +85,8 @@ app.get(
 //Update Route
 app.put(
   "/listing/:id",
+  listingValidate,
   wrapAsync(async (req, res) => {
-    if (!req.body.listing) {
-      throw new ExpressError(400, "Send valid Data for listing");
-    }
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.listing });
     res.redirect(`/listing/${id}`);
@@ -109,7 +108,7 @@ app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found!"));
 });
 
-//Error Handling Middleware
+// Error Handling Middleware
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went Wrong" } = err;
   res.status(statusCode).render("./listings/error.ejs", { message });
