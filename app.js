@@ -51,10 +51,6 @@ const sessionOptions = {
   },
 };
 
-app.get("/", (req, res) => {
-  res.send("Server word properly");
-});
-
 app.use(session(sessionOptions));
 app.use(flash());
 

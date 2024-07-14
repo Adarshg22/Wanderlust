@@ -23,6 +23,31 @@ body{
 
 .nav-link{
     color: #222222 !important;
+    font-size: large;
+    font-weight: 500;
+}
+
+/* Navbar Search */
+.btn-search{
+    background-color: #fe424d;
+    color: white;
+    border-radius: 25px;
+    padding: 0 1rem;
+}
+
+.btn-search:hover{
+    background-color: #fe424d;
+    color: white;
+}
+
+.btn-search i {
+    display: inline;
+    margin-right: 0.5rem;
+}
+
+.inp-search{
+    border-radius: 25px;
+    padding: 0.5rem 3rem;
 }
 
 /* Footer */
