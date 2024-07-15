@@ -58,7 +58,7 @@ app.use(methodOverride("_method"));
 
 const sessionOptions = {
   // store,
-  secret: "mySuperSecretCode",
+  secret: process.env.SECRET_CODE,
   resave: false,
   saveUninitialized: true,
   cookie: {
